@@ -1,3 +1,7 @@
 .card-title {
     font-family: cursive;
 }
+
+#employee-table {
+    font-size: 24px;
+}
