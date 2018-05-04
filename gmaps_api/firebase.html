@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <title>Click Button with Firebase!</title>
+
+    <!-- -->
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- -->
+    <h1>Ouch! You've clicked me <span id="click-value"></span> times!</h1>
+    <br>
+    <h1>Text message is <span id="click-value2"></span></h1>
+
+    <!-- -->
+    <button id="click-button">Click Me!!!!</button>
+
+    <!-- -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- ================================================================================== -->
+    <script>
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBPH6H536ccjgr9M48YunIT1tkMaYDJaUo",
+    authDomain: "ihavearrived-e9123.firebaseapp.com",
+    databaseURL: "https://ihavearrived-e9123.firebaseio.com",
+    projectId: "ihavearrived-e9123",
+    storageBucket: "ihavearrived-e9123.appspot.com",
+    messagingSenderId: "393004989891"
+  };
+  firebase.initializeApp(config);
+
+    // VARIABLES
+    // --------------------------------------------------------------------------------
+
+    var database = firebase.database();
+
+    // FUNCTIONS + EVENTS
+    // --------------------------------------------------------------------------------
+
+    $("#click-button").on("click", function() {
+      database.ref().set({
+        bdMessage: "Data was transfered"
+      });
+    });
+
+    // MAIN PROCESS + INITIAL CODE
+    // --------------------------------------------------------------------------------
+
+    database.ref().on("value", function(snapshot) { console.log(snapshot.val());
+      //$("#click-value").text(snapshot.val().clickCount);
+      //clickCounter = snapshot.val().clickCount;
+      $("#click-value2").text(snapshot.val().bdMessage);
+    }, function(errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+
+    </script>
+
+  </body>
+
+</html>
